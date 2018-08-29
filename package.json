@@ -4,11 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "prestart": "browserify dev/app.js > public/bundle.js",
-    "start": "node server.js",
+    "build-js": "browserify dev/app.js > public/bundle.js",
+    "start": "browserify dev/app.js > public/bundle.js --debug | node server.js",
     "nodemon": "nodemon --exec npm start --ignore public/bundle.js",
     "test": "mocha --colors"
   },
+  "pre-commit": [
+    "build-js"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -16,9 +19,10 @@
     "morgan": "^1.9.0"
   },
   "devDependencies": {
+    "browserify": "latest",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "mocha": "^5.2.0",
-    "browserify": "latest"
+    "pre-commit": "^1.2.2"
   }
 }
