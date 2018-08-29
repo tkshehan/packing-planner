@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: gKJXK0vphGO1tbo93tBwBR+1LHJxqsw6QhoTYkWBs0RnsvU0VPY1F7NWvA1ycYRBoXKPkmanHounQv723oHGAa9WUgA5z1uQNSG+8fxCuYFCcDcBkqdDQlH58/fjgVlePzcgt/Vc5ykl++p7agbCFUO2yYcxkbQ0LGmvwFqeWTlmvcgjNyImEA+B6r7VA/hXyP+CtzLN5isdIMRDpJFUrs1q4GKzXLhX02Acv0Cw3jYKg5Q3A05GfXBR5KCW+JOCohMbC4VLK8rCMsopxg9PNIfotrPXeG2Sje6+Qa6EsSmeCjI26KzoOTyJxeaXF63nBTisi2K5rEaU4CkLr9g+7c4bGLK8i7X/OmPticSVA/jSZvE0uhB2KgdK/M6hdjACjb6+ouN64tQC2HoRxHuM40aczzRPsY8WYXNkGf0xJWRhQrFDyJnRuQXObrW26B/y4HPpqZSRfbDuP3IT8VgSC20PZOsPHTE1BVZp/n4U3TQ1jXCZfOewq8v6Vr6OSXVOX+XuF+Dy4z1E87HLuhyXhVx8omPhGN80le0eFx+CeMG07tF6gpN4gfBTv34qiaojVBZTXl3nc8c54fUypo91fkH15WNu7JxrQn0p9+wU7WFbNDWsR3oSLpwsFYuw4qp3EGhL7pYCKYfFEkg9IRrjsPDOii37GCCTuOPiQpdHy94=
-  app: backlog-manage
+  app: packing-planner
   on:
-    repo: tkshehan/backlog-manager
+    repo: tkshehan/packing-planner
