@@ -1,12 +1,11 @@
 {
-  "name": "backlog-manager",
+  "name": "packing-planner",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "debug-js": "browserify dev/app.js > public/bundle.js -- debug",
     "start": "browserify dev/app.js > public/bundle.js | node server.js",
-    "nodemon": "npm run debug-js | nodemon --exec npm server.js --ignore public/bundle.js",
+    "nodemon": "browserify dev/app.js > public/bundle.js --debug | nodemon server.js --ignore public/bundle.js",
     "test": "mocha --colors"
   },
   "author": "",
