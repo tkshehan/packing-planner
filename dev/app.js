@@ -1,4 +1,7 @@
-const {sayHello} = require('./module');
+const {loadManager} = require('./lists-manager');
 
-$(sayHello);
+$(startUp);
 
+function startUp() {
+  loadManager();
+}
