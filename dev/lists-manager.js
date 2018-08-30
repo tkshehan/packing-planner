@@ -35,6 +35,18 @@ function buildListeners() {
     displayNewListModal();
   });
 
+  $('body').on('submit', '.js-new-list-form', function(event) {
+    let values = $(this).serializeArray();
+    event.preventDefault();
+
+    let name = values[0].value;
+    let template = values[1].value;
+    buildNewList(name, template);
+
+    $('.overlay').remove();
+    $('.modal').remove();
+  })
+
   $('body').on('click', '.js-close-modal', function() {
     $('.overlay').remove();
     $('.modal').remove();
@@ -43,14 +55,33 @@ function buildListeners() {
 
 function displayNewListModal() {
   let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal');
-  let $content = $('<div>').addClass('modal-content');
-  let $closeButton = $('<button> ')
-    .text('Close')
-    .addClass('js-close-modal close-modal');
-  $content.append('<p> No Content Yet', $closeButton);
-  $modal.append($content);
+  let $modal = $('<div>').addClass('modal')
+    .attr('aria-live', 'assertive');
   $('body').append($overlay, $modal);
+
+  let $content = $('<div>').addClass('modal-content');
+  let $newListForm = $('<form>')
+    .addClass('js-new-list-form')
+    .html(`
+      <legend> Create New List </legend>
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="new-list-name">
+
+      <label for="template">Template</label>
+      <select name="template" id="template-select">
+        <option>None</option>
+        <option value="camping">Camping</option>
+        <option value="beach">Beach</option>
+        <option value="general">General</option>
+      </select>
+      <div class="form-buttons">
+        <input type="submit" value="Create" class="button">
+        <button class="js-close-modal button"> Cancel </button>
+      </div>
+  `);
+
+  $content.append($newListForm);
+  $modal.append($content);
 }
 
 
@@ -85,5 +116,9 @@ function displayLists(lists) {
   });
   $('.table-section').append($table);
 };
+
+function buildNewList(name, template) {
+
+}
 
 module.exports = {loadManager}

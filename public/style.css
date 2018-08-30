@@ -20,9 +20,10 @@ main {
 
 section {
   width: 100%;
+  margin-bottom: 10px;
 }
 
-button {
+.option-bar button {
   width: 100%;
   border: transparent;
   display: block;
