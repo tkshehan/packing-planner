@@ -18,6 +18,16 @@ main {
   align-items: center;
 }
 
+section {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  border: transparent;
+  display: block;
+}
+
 table {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
@@ -58,6 +68,7 @@ tr:not(:first-child):hover td {
 
 .flex-grid {
   display: flex;
+  flex-direction: row;
 }
 
 .col {
