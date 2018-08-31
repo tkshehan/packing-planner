@@ -4,15 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "listen": "browserify dev/app.js > public/bundle.js --debug | node server.js",
     "start": "browserify dev/app.js > public/bundle.js | node server.js",
-    "nodemon": "browserify dev/app.js > public/bundle.js --debug | nodemon server.js --ignore public/bundle.js",
+    "nodemon": "nodemon --exec npm run listen --ignore public/bundle.js",
     "test": "mocha --colors"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "normalize.css": "^8.0.0"
   },
   "devDependencies": {
     "browserify": "latest",
