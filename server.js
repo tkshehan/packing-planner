@@ -10,6 +10,12 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 
+const listsRouter = require('./lists-router');
+const usersRouter = require('./users-router');
+
+app.use('/lists', listsRouter);
+app.use('/users', usersRouter);
+
 let server;
 
 function runServer(databaseUrl, port = PORT) {
