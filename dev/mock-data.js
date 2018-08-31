@@ -46,4 +46,25 @@ const packingData = {
   ]
 };
 
-module.exports = {listsData, packingData};
+const templates = {
+  'None': [],
+  'Beach': [
+    'towel',
+    'sunscreen',
+    'cooler', 'water',
+    'sunglasses',
+    'swimsuit',
+  ],
+  'Camping': [
+    'tent',
+    'bug-spray',
+    'sleeping-bag',
+    'flash-light',
+    'fire-starter',
+    'toiletries',
+    'food',
+    'first-aid kit',
+  ],
+}
+
+module.exports = {listsData, packingData, templates};

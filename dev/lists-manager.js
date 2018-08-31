@@ -1,5 +1,4 @@
-const {listsData} = require('./mock-data');
-const {loadPlanner} = require('./list-planner');
+const {listsData, templates} = require('./mock-data');
 
 function loadManager() {
   buildPage();
@@ -20,14 +19,17 @@ function buildPage() {
     $newListButton.append('<button> New Packing List');
     let $emptyCol = $('<div>').addClass('col');
 
-    $optionBar.append($newListButton, $emptyCol);
+    $optionBar.append($newListButton, $emptyCol, $emptyCol.clone());
     return $optionBar;
   }
 }
 
 function buildListeners() {
-  $('main').on('click', 'tr', function() {
+  $('main').off();
+
+  $('main').on('click', 'tr:not(:first-child)', function() {
     let id = $(this).data('id');
+    const {loadPlanner} = require('./list-planner');
     loadPlanner(id);
   });
 
@@ -45,7 +47,7 @@ function buildListeners() {
 
     $('.overlay').remove();
     $('.modal').remove();
-  })
+  });
 
   $('body').on('click', '.js-close-modal', function() {
     $('.overlay').remove();
@@ -69,10 +71,9 @@ function displayNewListModal() {
 
       <label for="template">Template</label>
       <select name="template" id="template-select">
-        <option>None</option>
-        <option value="camping">Camping</option>
-        <option value="beach">Beach</option>
-        <option value="general">General</option>
+        <option value="None">None</option>
+        <option value="Camping">Camping</option>
+        <option value="Beach">Beach</option>
       </select>
       <div class="form-buttons">
         <input type="submit" value="Create" class="button">
@@ -100,8 +101,8 @@ function displayLists(lists) {
     .addClass('js-table')
     .append(`
     <tr>
-      <th> Name </td>
-      <th> Items </td>
+      <th> Name </th>
+      <th> Items </th>
     </tr>
   `);
 
@@ -118,7 +119,14 @@ function displayLists(lists) {
 };
 
 function buildNewList(name, template) {
-
+  if (!name) {
+    console.log('no name');
+    return;
+  }
+  // build new list from template
+  // send to server, recieve id
+  // const {loadPlanner} = require('./list-planner');
+  // loadPlanner(id);
 }
 
 module.exports = {loadManager}
