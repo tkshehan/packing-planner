@@ -10,10 +10,10 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 
-const listsRouter = require('./lists-router');
-const usersRouter = require('./users-router');
+const packListsRouter = require('./routers/pack-lists-router');
+const usersRouter = require('./routers/users-router');
 
-app.use('/lists', listsRouter);
+app.use('/pack-lists', packListsRouter);
 app.use('/users', usersRouter);
 
 let server;

@@ -4,6 +4,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+const {PackList} = require('../models/pack-list-model');
+
 router.get('/', (req, res) => {
 
 });
