@@ -7,7 +7,7 @@ const faker = require('faker');
 
 const {TEST_DATABASE_URL} = require('../config');
 const {app, runServer, closeServer} = require('../server');
-const {PackList} = require('../models/pack-list-model');
+const {PackList} = require('../pack-lists/models');
 
 chai.use(chaiHttp);
 

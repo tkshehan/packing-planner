@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const {PackList} = require('../models/pack-list-model');
+const {PackList} = require('./models');
 
 router.get('/', (req, res) => {
   PackList.findOne()

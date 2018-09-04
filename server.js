@@ -10,8 +10,8 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 
-const packListsRouter = require('./routers/pack-lists-router');
-const usersRouter = require('./routers/users-router');
+const packListsRouter = require('./pack-lists/router');
+const usersRouter = require('./users/router');
 
 app.use('/pack-lists', packListsRouter);
 app.use('/users', usersRouter);
