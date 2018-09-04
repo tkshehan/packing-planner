@@ -28,9 +28,21 @@ function generatePackListData() {
   };
 }
 
-
+function tearDownCollection() {
+  PackList.remove({}, function(err) {
+    console.log('collection removed')
+  });
+}
 
 describe('PackList Schema', function() {
+
+  before(function() {
+    return seedPackList();
+  });
+
+  after(function() {
+    return tearDownCollection();
+  });
 
   it('should follow the Schema', function() {
     seedPackList().then(testList => {
