@@ -14,6 +14,7 @@ const PackListSchema = mongoose.Schema({
 
 PackListSchema.methods.serialize = function() {
   return {
+    id: this._id,
     name: this.name,
     items: this.items,
   };
