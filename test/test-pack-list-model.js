@@ -28,8 +28,17 @@ function generatePackListData() {
   };
 }
 
+
+
 describe('PackList Schema', function() {
-  seedPackList().then(function(res) {
-    console.log(res.map((item) => item.serialize()));
+
+  it('should follow the Schema', function() {
+    seedPackList().then(testList => {
+      expect(testList).to.be.an('Array');
+      testList.forEach((packList) => {
+        expect(packList).to.have.keys(['name', 'items']);
+        expect(packList.items).to.have.keys(['item', 'packed', 'toPack']);
+      });
+    })
   });
-});
+})

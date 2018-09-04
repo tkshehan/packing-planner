@@ -16,6 +16,10 @@ const usersRouter = require('./routers/users-router');
 app.use('/pack-lists', packListsRouter);
 app.use('/users', usersRouter);
 
+app.use('/', function(req, res) {
+  res.sendStatus(200);
+});
+
 let server;
 
 function runServer(databaseUrl, port = PORT) {

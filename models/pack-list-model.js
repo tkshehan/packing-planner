@@ -13,6 +13,13 @@ const PackListSchema = mongoose.Schema({
 });
 
 PackListSchema.methods.serialize = function() {
+  return {
+    name: this.name,
+    items: this.items,
+  };
+}
+
+PackListSchema.methods.summarize = function() {
   let {packed, toPack} = this.items.reduce((accum, item) => {
     accum.packed += item.packed;
     accum.toPack += item.toPack;
