@@ -7,7 +7,7 @@ const faker = require('faker');
 
 const {TEST_DATABASE_URL} = require('../config');
 const {app, runServer, closeServer} = require('../server');
-const {PackList} = require('../pack-lists/models');
+const {PackList} = require('../pack-lists/');
 
 chai.use(chaiHttp);
 
@@ -72,7 +72,7 @@ describe('PackList API Resource', function() {
     return closeServer();
   });
 
-  describe('GET /pack-lists/:id endpoint', function() {
+  describe('GET /api/packing/:id endpoint', function() {
     it('should return the packlist of the id given', function() {
       let testList;
       return PackList.findOne()
@@ -81,7 +81,7 @@ describe('PackList API Resource', function() {
         })
         .then(function() {
           return chai.request(app)
-            .get(`/pack-lists/${testList.id}`)
+            .get(`/api/packing/${testList.id}`)
         })
         .then(function(res) {
           expect(res).to.have.status(200);
@@ -97,7 +97,7 @@ describe('PackList API Resource', function() {
     })
   });
 
-  describe('POST /pack-lists endpoint', function() {
+  describe('POST /api/packing endpoint', function() {
     it('should add a new pack list', function() {
       let newList = generatePackListData();
       let count;
@@ -107,7 +107,7 @@ describe('PackList API Resource', function() {
         })
         .then(function() {
           return chai.request(app)
-            .post('/pack-lists')
+            .post('/api/packing')
             .send(newList);
         })
         .then(function(res) {
@@ -135,14 +135,14 @@ describe('PackList API Resource', function() {
     });
   });
 
-  describe('DELETE /pack-lists/:id endpoint', function() {
+  describe('DELETE /api/packing/:id endpoint', function() {
     it('should delete a pack-list by id', function() {
       let testList;
 
       return PackList.findOne()
         .then(function(list) {
           testList = list;
-          return chai.request(app).delete(`/pack-lists/${list.id}`)
+          return chai.request(app).delete(`/api/packing/${list.id}`)
         })
         .then(function(res) {
           expect(res).to.have.status(204);
@@ -154,7 +154,7 @@ describe('PackList API Resource', function() {
     });
   });
 
-  describe('PUT /pack-lists/:id endpoint', function() {
+  describe('PUT /api/packing/:id endpoint', function() {
     it('should update the fields of a list by id', function() {
       const updateData = generatePackListData(20);
       let originalData;
@@ -165,7 +165,7 @@ describe('PackList API Resource', function() {
           originalData = list;
 
           return chai.request(app)
-            .put(`/pack-lists/${updateData.id}`)
+            .put(`/api/packing/${updateData.id}`)
             .send(updateData);
         })
         .then(function(res) {
