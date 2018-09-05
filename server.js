@@ -8,6 +8,7 @@ const {DATABASE_URL, PORT} = require('./config');
 const app = express();
 
 app.use(morgan('common'));
+app.use(express.static('public'));
 app.use(express.json());
 
 const {packListRouter} = require('./pack-lists/');
