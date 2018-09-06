@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .then(list => {
       console.log(list);
       res.json(list)
-    })
+    });
 });
 
 router.get('/:id', (req, res) => {
@@ -24,6 +24,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req);
   const requiredField = 'name';
   if (!(requiredField in req.body)) {
     const message = 'Missing name in request body';
