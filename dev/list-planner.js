@@ -1,10 +1,11 @@
 const packingApi = require('./packing-client');
+const {buildModalListeners} = require('./modals');
 let currentList = {};
 
 
 function loadPlanner(id) {
   buildPage();
-  buildListeners();
+  buildListeners(currentList);
   getAndDisplayData(id);
 }
 
@@ -36,8 +37,10 @@ function buildPage() {
 function getAndDisplayData(id) {
   getData(id)
     .then(data => {
-      currentList = data;
-      return data;
+      currentList.id = data.id;
+      currentList.items = data.items;
+      currentList.name = data.name;
+      return currentList;
     })
     .then(displayData)
 }
@@ -83,10 +86,12 @@ function displayData(data) {
   $('.table-section').append($table);
 }
 
-function buildListeners() {
+function buildListeners(list) {
   let $main = $('main');
   $main.off();
   $('body').off();
+
+  buildModalListeners(list);
 
   $main.on('click', '.js-back', function() {
     const {loadManager} = require('./lists-manager');
@@ -117,6 +122,7 @@ function buildListeners() {
   });
 
   $main.on('click', '.js-save', function() {
+    console.log(currentList);
     packingApi.updatedById(currentList.id, currentList);
   });
 }

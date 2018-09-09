@@ -1,6 +1,6 @@
 const packingApi = require('./packing-client');
 
-function buildModalListeners() {
+function buildModalListeners(list) {
   let $main = $('main');
   let $body = $('body');
 
@@ -13,7 +13,7 @@ function buildModalListeners() {
   buildLoadListener($main, $body);
 
   // Requires a clickable element with the class js-new-entry-button
-  buildNewItemListeners($main, $body);
+  buildNewItemListeners($main, $body, list);
 }
 
 function buildSharedListeners($body) {
@@ -57,7 +57,7 @@ function buildLoadListener($main, $body) {
   });
 }
 
-function buildNewItemListeners($main, $body) {
+function buildNewItemListeners($main, $body, list) {
   $main.on('click', '.js-new-entry-button', function(event) {
     event.preventDefault();
     displayNewEntryModal();
@@ -65,9 +65,10 @@ function buildNewItemListeners($main, $body) {
 
   $body.on('submit', '.js-new-entry-form', function(event) {
     let values = $(this).serializeArray();
+    console.log(values);
     event.preventDefault();
 
-    addNewEntry(values[0].value);
+    addNewEntry(list, values[0].value, values[1].value);
 
     closeModal();
   });
@@ -85,7 +86,7 @@ function displayNewListModal() {
     .html(`
       <legend> Create New List </legend>
       <label for="name">Name: </label>
-      <input type="text" name="name" id="new-list-name">
+      <input type="text" name="name" id="new-list-name" required>
 
       <label for="template">Template</label>
       <select name="template" id="template-select">
@@ -129,15 +130,26 @@ function displayLoadListModal() {
 
 function displayNewEntryModal() {
   let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div').addClass('modal')
+  let $modal = $('<div>').addClass('modal')
     .attr('aria-live', 'assertive');
   $('body').append($overlay, $modal);
 
+  let $content = $('<div>').addClass('modal-content');
   let $newEntryForm = $('<form>')
     .addClass('js-new-entry-form')
     .html(`
-    
-    `)
+    <legend> New Item </legend>
+    <label for ="item"> Item </label>
+    <input type="text" name="item" id="new-item" required>
+    <input type="number" name="amount" id="amount" min="1" max="10" value="1" required>
+    <div class="form-buttons">
+      <input type="submit" value="Add" class="button">
+      <button type="button" class="js-close-modal button"> Cancel </button>
+    </div>
+    `);
+
+  $content.append($newEntryForm);
+  $modal.append($content);
 }
 
 function closeModal() {
@@ -167,11 +179,11 @@ function loadList(id) {
   loadPlanner(id);
 }
 
-function addNewEntry(list, name, packed = 0, toPack = 1) {
+function addNewEntry(list, name, toPack = 1) {
   console.log(`adding new item ${name}`);
   list.items.push({
-    name: name,
-    packed: packed,
+    item: name,
+    packed: 0,
     toPack: toPack,
   });
 
