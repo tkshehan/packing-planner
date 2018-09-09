@@ -84,14 +84,16 @@ function displayData(data) {
 }
 
 function buildListeners() {
-  $('main').off();
+  let $main = $('main');
+  $main.off();
+  $('body').off();
 
-  $('main').on('click', '.js-back', function() {
+  $main.on('click', '.js-back', function() {
     const {loadManager} = require('./lists-manager');
     loadManager();
   });
 
-  $('main').on('click', '.js-check-entry', function() {
+  $main.on('click', '.js-check-entry', function() {
     let $row = $(this).closest('tr');
     let item = currentList.items.filter(item => item._id === $row.data('id'))[0];
 
@@ -108,13 +110,13 @@ function buildListeners() {
     $row.children('.td-packed').text(`${item.packed} / ${item.toPack}`);
   })
 
-  $('main').on('click', '.js-delete-entry', function() {
+  $main.on('click', '.js-delete-entry', function() {
     let $row = $(this).closest('tr');
     currentList.items = currentList.items.filter(item => item._id !== $row.data('id'));
     $row.remove();
   });
 
-  $('main').on('click', '.js-save', function() {
+  $main.on('click', '.js-save', function() {
     packingApi.updatedById(currentList.id, currentList);
   });
 }

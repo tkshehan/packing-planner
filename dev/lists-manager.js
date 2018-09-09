@@ -1,6 +1,5 @@
 const {buildModalListeners} = require('./modals');
-
-const {getMultiple, deleteById} = require('./packing-client');
+const packingApi = require('./packing-client');
 
 function loadManager() {
   buildPage();
@@ -27,19 +26,22 @@ function buildPage() {
 }
 
 function buildListeners() {
-  $('main').off();
+  let $main = $('main');
+  $main.off();
+  $('body').off();
 
-  $('main').on('click', 'tr:not(:first-child)', function() {
+  $main.on('click', 'tr:not(:first-child)', function() {
     let id = $(this).data('id');
     const {loadPlanner} = require('./list-planner');
+    $('.js-table-remove');
     loadPlanner(id);
   });
 
-  $('main').on('click', '.js-delete-list', function(event) {
+  $main.on('click', '.js-delete-list', function(event) {
     event.stopImmediatePropagation();
     let id = $(this).closest('tr').data('id');
     console.log(id);
-    deleteById(id)
+    packingApi.deleteById(id)
       .then(function() {
         $('.js-table').remove();
         getAndDisplayLists();
@@ -54,7 +56,7 @@ function getAndDisplayLists() {
 }
 
 function getLists() {
-  return getMultiple();
+  return packingApi.getMultiple();
 }
 
 function displayLists(lists) {

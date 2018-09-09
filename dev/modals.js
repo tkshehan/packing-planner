@@ -1,28 +1,32 @@
 const packingApi = require('./packing-client');
 
 function buildModalListeners() {
-  buildSharedListeners();
+  let $main = $('main');
+  let $body = $('body');
+
+  buildSharedListeners($body);
 
   // Requires a clickable element with the class js-new-list-button
-  buildNewListListener();
+  buildNewListListener($main, $body);
 
   // Requires a clickable element with the class js-load-list-button
-  buildLoadListener();
+  buildLoadListener($main, $body);
 
   // Requires a clickable element with the class js-new-entry-button
-  buildNewItemListeners();
+  buildNewItemListeners($main, $body);
 }
 
-function buildSharedListeners() {
-  $('body').on('click', '.js-close-modal', closeModal);
+function buildSharedListeners($body) {
+  $body.on('click', '.js-close-modal', closeModal);
 }
 
-function buildNewListListener() {
-  $('main').on('click', '.js-new-list-button', function() {
+function buildNewListListener($main, $body) {
+  $main.on('click', '.js-new-list-button', function(event) {
+    event.preventDefault();
     displayNewListModal();
   });
 
-  $('body').on('submit', '.js-new-list-form', function(event) {
+  $body.on('submit', '.js-new-list-form', function(event) {
     let values = $(this).serializeArray();
     event.preventDefault();
 
@@ -37,12 +41,13 @@ function buildNewListListener() {
 
 }
 
-function buildLoadListener() {
-  $('main').on('click', '.js-load-list-button', function() {
+function buildLoadListener($main, $body) {
+  $main.on('click', '.js-load-list-button', function(event) {
+    event.preventDefault();
     displayLoadListModal();
   });
 
-  $('body').on('submit', '.js-load-list-form', function(event) {
+  $body.on('submit', '.js-load-list-form', function(event) {
     let values = $(this).serializeArray();
     event.preventDefault();
 
@@ -52,12 +57,13 @@ function buildLoadListener() {
   });
 }
 
-function buildNewItemListeners() {
-  $('main').on('click', '.js-new-entry-button', function() {
+function buildNewItemListeners($main, $body) {
+  $main.on('click', '.js-new-entry-button', function(event) {
+    event.preventDefault();
     displayNewEntryModal();
   });
 
-  $('body').on('submit', '.js-new-entry-form', function(event) {
+  $body.on('submit', '.js-new-entry-form', function(event) {
     let values = $(this).serializeArray();
     event.preventDefault();
 
