@@ -19,6 +19,10 @@ app.use('/', function(req, res) {
   res.sendStatus(200);
 });
 
+app.use('*', function(req, res) {
+  res.sendStatus(404);
+});
+
 let server;
 
 function runServer(databaseUrl, port = PORT) {

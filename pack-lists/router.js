@@ -7,10 +7,9 @@ mongoose.Promise = global.Promise;
 const {PackList} = require('./models');
 
 router.get('/', (req, res) => {
-  PackList.findOne()
-    .then(list => {
-      console.log(list);
-      res.json(list)
+  PackList.find()
+    .then(lists => {
+      res.json(lists.map(list => list.summarize()));
     });
 });
 
@@ -24,7 +23,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req);
   const requiredField = 'name';
   if (!(requiredField in req.body)) {
     const message = 'Missing name in request body';
@@ -53,6 +51,7 @@ router.put('/:id', (req, res) => {
 
   const updated = {};
   const updateableFields = ['name', 'items'];
+
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
@@ -71,7 +70,7 @@ router.delete('/:id', (req, res) => {
       res.status(204).json({message: 'Pack List Deleted'});
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       res.status(500).json({error: 'Something went wrong'});
     });
 });

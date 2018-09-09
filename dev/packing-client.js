@@ -10,6 +10,16 @@ function post(data) {
   return $.ajax(settings);
 }
 
+function getMultiple() {
+  let settings = {
+    method: 'GET',
+    url: './api/packing',
+    contentType: 'application/json; charset=utf-8',
+  }
+
+  return $.ajax(settings);
+}
+
 function getById(id) {
   let settings = {
     method: 'GET',
@@ -27,7 +37,7 @@ function updatedById(id, data) {
   let settings = {
     method: 'PUT',
     url: `./api/packing/${id}`,
-    contentType: 'applicatoin/json; charset=utf-8',
+    contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify(data),
   }
@@ -45,4 +55,4 @@ function deleteById(id) {
   return $.ajax(settings);
 }
 
-module.exports = {getById, deleteById, updatedById, post};
+module.exports = {getMultiple, getById, deleteById, updatedById, post};

@@ -63,10 +63,25 @@ tr:nth-child(odd) td {
   background: #FEFEFE;
 }
 
-tr:not(:first-child):hover td {
+.td-check {
+  text-align: left;
+  width: 20px;
+}
+
+.td-delete {
+  text-align: right;
+  width: 20px;
+}
+
+table>tr.green td {
+  background: green;
+}
+
+/* tr:not(:first-child):hover td {
   background: #666;
   color: white;
 }
+*/
 
 .flex-grid {
   display: flex;

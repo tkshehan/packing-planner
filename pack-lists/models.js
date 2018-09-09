@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const PackListSchema = mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   items: [{
-    item: String,
-    packed: Number,
-    toPack: Number,
+    item: {type: String, required: true},
+    packed: {type: Number, default: 0},
+    toPack: {type: Number, default: 1},
   }],
 });
 
