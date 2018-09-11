@@ -15,10 +15,6 @@ const {packListRouter} = require('./pack-lists/');
 
 app.use('/api/packing', packListRouter);
 
-app.use('/', function(req, res) {
-  res.sendStatus(200);
-});
-
 app.use('*', function(req, res) {
   res.sendStatus(404);
 });
