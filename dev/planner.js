@@ -1,5 +1,5 @@
-const packingApi = require('./packing-client');
-const {buildModalListeners} = require('./modals');
+const packingApi = require('./packing-api');
+const {addNewEntry, buildModalListeners, saveAndUpdate} = require('./modals');
 let currentList = {};
 
 
@@ -12,25 +12,40 @@ function loadPlanner(id) {
 function buildPage() {
   $('main').empty();
 
-  let $optionBar = buildOptionBar();
-  let $tableSection = $('<section>').addClass('table-section');
+  const $optionBar = buildOptionBar();
+  const $quickItems = buildQuickItems();
+  const $tableSection = $('<section>').addClass('table-section');
+  const $content = $('<div>').addClass('flex-grid');
 
-  $('main').append($optionBar, $tableSection);
+  $content.append($quickItems, $tableSection);
+  $('main').append($optionBar, $content);
 
   function buildOptionBar() {
-    let $optionBar = $('<section>').addClass('option-bar flex-grid');
-    let $newEntryButton = $('<div>')
+    const $optionBar = $('<section>').addClass('option-bar flex-grid');
+    const $newEntryButton = $('<div>')
       .addClass('col js-new-entry-button')
       .append('<button> New Entry');
 
-    let $emptyCol = $('<div>').addClass('col');
-    let $mainListButton = $('<div>').addClass('col js-back');
+    const $emptyCol = $('<div>').addClass('col');
+    const $mainListButton = $('<div>').addClass('col js-back');
     $mainListButton.append('<button> Back');
-    let $saveListButton = $('<div>').addClass('col js-save');
+    const $saveListButton = $('<div>').addClass('col js-save');
     $saveListButton.append('<button> Save');
 
     $optionBar.append($newEntryButton, $emptyCol, $mainListButton, $emptyCol.clone(), $saveListButton);
     return $optionBar;
+  }
+
+  function buildQuickItems() {
+    let $quickItems = $('<section>').addClass('quick-items');
+    let items = ['clothes', 'socks', 'food', 'swimsuit', 'phone charger', 'first-aid kit'];
+    items.forEach(function(item) {
+      let $newButton = $('<button>')
+        .text(item)
+        .addClass('js-quick-item');
+      $quickItems.append($newButton);
+    });
+    return $quickItems;
   }
 }
 
@@ -122,9 +137,27 @@ function buildListeners(list) {
   });
 
   $main.on('click', '.js-save', function() {
-    console.log(currentList);
     packingApi.updatedById(currentList.id, currentList);
   });
+
+  $('main').on('click', '.js-quick-item', function() {
+    const newItem = $(this).text();
+    let hasItem = false;
+
+    currentList.items.forEach(item => {
+      if (item.item === newItem) {
+        item.toPack++;
+        hasItem = true;
+      }
+    });
+
+    if (!hasItem) {
+      addNewEntry(currentList, newItem);
+    }
+
+    saveAndUpdate(currentList);
+  })
+
 }
 
 module.exports = {loadPlanner};

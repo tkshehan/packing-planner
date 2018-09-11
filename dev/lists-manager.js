@@ -1,5 +1,5 @@
 const {buildModalListeners} = require('./modals');
-const packingApi = require('./packing-client');
+const packingApi = require('./packing-api');
 
 function loadManager() {
   buildPage();
@@ -32,7 +32,7 @@ function buildListeners() {
 
   $main.on('click', 'tr:not(:first-child)', function() {
     let id = $(this).data('id');
-    const {loadPlanner} = require('./list-planner');
+    const {loadPlanner} = require('./planner');
     $('.js-table-remove');
     loadPlanner(id);
   });

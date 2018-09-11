@@ -1,4 +1,4 @@
-const packingApi = require('./packing-client');
+const packingApi = require('./packing-api');
 
 function buildModalListeners(list) {
   let $main = $('main');
@@ -33,7 +33,7 @@ function buildNewListListener($main, $body) {
     let name = values[0].value;
     let template = values[1].value;
 
-    const {templates} = require('./mock-data');
+    const {templates} = require('./templates');
     buildNewList(name, templates[template]);
 
     closeModal();
@@ -69,6 +69,7 @@ function buildNewItemListeners($main, $body, list) {
     event.preventDefault();
 
     addNewEntry(list, values[0].value, values[1].value);
+    saveAndUpdate(list);
 
     closeModal();
   });
@@ -167,7 +168,7 @@ function buildNewList(name, template) {
   packingApi
     .post(newList)
     .then(function(res) {
-      const {loadPlanner} = require('./list-planner');
+      const {loadPlanner} = require('./planner');
       loadPlanner(res.id);
     });
 
@@ -175,7 +176,7 @@ function buildNewList(name, template) {
 
 function loadList(id) {
   console.log(`loading list with ${id}`);
-  const {loadPlanner} = require('./list-planner');
+  const {loadPlanner} = require('./planner');
   loadPlanner(id);
 }
 
@@ -186,13 +187,15 @@ function addNewEntry(list, name, toPack = 1) {
     packed: 0,
     toPack: toPack,
   });
+}
 
+function saveAndUpdate(list) {
   packingApi
     .updatedById(list.id, list)
     .then(function(res) {
-      const {loadPlanner} = require('./list-planner');
+      const {loadPlanner} = require('./planner');
       loadPlanner(list.id);
     });
 }
 
-module.exports = {buildModalListeners};
+module.exports = {buildModalListeners, addNewEntry, saveAndUpdate};

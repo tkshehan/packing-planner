@@ -3,7 +3,7 @@
 }
 
 header, main {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -28,6 +28,12 @@ section {
   border: transparent;
   display: block;
   box-shadow: #888888 1px 2px;
+}
+
+.quick-items {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50px;
 }
 
 table {
@@ -86,6 +92,7 @@ table>tr.green td {
 .flex-grid {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .col {
