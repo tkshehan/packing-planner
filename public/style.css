@@ -23,7 +23,18 @@ section {
   margin-bottom: 10px;
 }
 
+button {
+  background-color: white;
+}
+
+.option-bar {
+  background-color: #F1F1F1;
+  height: 30px;
+  padding: 5px;
+}
+
 .option-bar button {
+  height: 20px;
   width: 100%;
   border: transparent;
   display: block;
@@ -34,6 +45,50 @@ section {
   display: flex;
   flex-direction: column;
   flex-basis: 50px;
+  width: 60px;
+  text-align: center;
+  border: 1px solid black;
+  margin-right: 8px;
+  padding: 5px;
+  background-color: #F1F1F1;
+}
+
+.quick-items button {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  margin-top: 5px;
+}
+
+.quick-clothes {
+  background-image: url(assets/006-tshirt.png);
+}
+
+.quick-socks {
+  background-image: url(assets/001-underwear.png);
+}
+
+.quick-food {
+  background-image: url(assets/005-fruit.png);
+}
+
+.quick-swimsuit {
+  background-image: url(assets/007-short.png)
+}
+
+.quick-phone-charger {
+  background-image: url(assets/002-usb.png);
+}
+
+.quick-first-aid {
+  background-image: url(assets/003-medicine.png)
+}
+
+.quick-water {
+  background-image: url(assets/004-water.png)
 }
 
 table {

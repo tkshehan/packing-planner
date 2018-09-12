@@ -37,12 +37,14 @@ function buildPage() {
   }
 
   function buildQuickItems() {
-    let $quickItems = $('<section>').addClass('quick-items');
-    let items = ['clothes', 'socks', 'food', 'swimsuit', 'phone charger', 'first-aid kit'];
+    let $quickItems = $('<section>')
+      .addClass('quick-items')
+      .append($('<div>').text('Quick Add'));
+    let items = ['water', 'clothes', 'socks', 'food', 'swimsuit', 'phone-charger', 'first-aid kit'];
     items.forEach(function(item) {
       let $newButton = $('<button>')
-        .text(item)
-        .addClass('js-quick-item');
+        .data('item', item)
+        .addClass(`js-quick-item quick-${item}`);
       $quickItems.append($newButton);
     });
     return $quickItems;
@@ -141,7 +143,7 @@ function buildListeners(list) {
   });
 
   $('main').on('click', '.js-quick-item', function() {
-    const newItem = $(this).text();
+    const newItem = $(this).data('item');
     let hasItem = false;
 
     currentList.items.forEach(item => {
