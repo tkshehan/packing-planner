@@ -120,6 +120,22 @@ function buildNewTemplateListeners($main, $body) {
     displayNewTemplateModal();
   });
 
+  $body.on('click', '.js-add-template-item', function(event) {
+    event.preventDefault();
+    $('.extra-items').append(`
+    <div>
+        <label>
+          Item 
+          <input type="text" required> 
+        </label>
+        <label for="amount-0">
+          #
+          <input type="number" min="1" max="10" value="1" required>
+        </label>
+        </div>
+    `);
+  })
+
   $body.on('submit', '.js-new-template-form', function(event) {
     event.preventDefault;
 
@@ -188,14 +204,21 @@ function displayNewTemplateModal() {
       <legend> New Template </legend>
       <label for="name"> Name </label>
       <input type="text" name="name" id="new-template" required">
-      <div class="extra-item-buttons">
-        <label for ="item-0"> Item </label>
-        <input type="text" name="item-0" id="new-item-0" required>
-        <label for="amount-0"> # </label>
-        <input type="number" name="amount-0" id="amount-0" min="1" max="10" value="1" required>
+      <button class="js-add-template-item"> Add </button>
+      <div class="extra-items">
+        <div>
+        <label>
+          Item 
+          <input type="text" required> 
+        </label>
+        <label for="amount-0">
+          #
+          <input type="number" min="1" max="10" value="1" required>
+        </label>
+        </div>
       </div>
       <div class="form-buttons">
-        <input type="submit" value="Add" class="button">
+        <input type="submit" value="Create Template" class="button">
         <button type="button" class="js-close-modal button"> Cancel </button>
       </div>
     `);
