@@ -53,6 +53,11 @@ button {
   background-color: #F1F1F1;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .quick-items button {
   background-repeat: no-repeat;
   background-position: 50% 50%;

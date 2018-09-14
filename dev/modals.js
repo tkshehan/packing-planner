@@ -114,6 +114,7 @@ function displayNewListModal() {
   }
 }
 
+let templateEntryCounter = 0;
 function buildNewTemplateListeners($main, $body) {
   $main.on('click', '.js-new-template-button', function(event) {
     event.preventDefault();
@@ -122,24 +123,23 @@ function buildNewTemplateListeners($main, $body) {
 
   $body.on('click', '.js-add-template-item', function(event) {
     event.preventDefault();
-    $('.extra-items').append(`
-    <div>
+    templateEntryCounter++;
+    $('.js-extra-items').append(`
         <label>
           Item 
-          <input type="text" required> 
+          <input name="template-entry-${templateEntryCounter}" type="text" required> 
         </label>
-        <label for="amount-0">
-          #
-          <input type="number" min="1" max="10" value="1" required>
-        </label>
-        </div>
     `);
   })
 
   $body.on('submit', '.js-new-template-form', function(event) {
-    event.preventDefault;
-
+    let values = $(this).serializeArray();
+    event.preventDefault();
+    console.log(values);
+    addTemplate(values);
     saveTemplates(templates);
+
+    closeModal();
   })
 }
 
@@ -198,6 +198,7 @@ function displayNewTemplateModal() {
   $('body').append($overlay, $modal);
 
   let $content = $('<div>').addClass('modal-content');
+  templateEntryCounter = 0;
   let $newTemplateForm = $('<form>')
     .addClass('js-new-template-form')
     .html(`
@@ -205,17 +206,11 @@ function displayNewTemplateModal() {
       <label for="name"> Name </label>
       <input type="text" name="name" id="new-template" required">
       <button class="js-add-template-item"> Add </button>
-      <div class="extra-items">
-        <div>
+      <div class="js-extra-items flex-col">
         <label>
           Item 
-          <input type="text" required> 
+          <input name="template-entry-0 type="text" required> 
         </label>
-        <label for="amount-0">
-          #
-          <input type="number" min="1" max="10" value="1" required>
-        </label>
-        </div>
       </div>
       <div class="form-buttons">
         <input type="submit" value="Create Template" class="button">
@@ -269,6 +264,14 @@ function saveAndUpdate(list) {
       const {loadPlanner} = require('./planner');
       loadPlanner(list.id);
     });
+}
+
+function addTemplate(values) {
+  let name = values[0].value;
+  templates[name] = [];
+  for (let i = 1; i < values.length; i++) {
+    templates[name].push({item: values[i].value});
+  }
 }
 
 module.exports = {buildModalListeners, addNewEntry, saveAndUpdate};
