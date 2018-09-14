@@ -29,12 +29,12 @@ button {
 
 .option-bar {
   background-color: #F1F1F1;
-  height: 30px;
-  padding: 5px;
+  height: auto;
+  padding: 5px 10px;
 }
 
 .option-bar button {
-  height: 20px;
+  height: 100%;
   width: 100%;
   border: transparent;
   display: block;
@@ -135,7 +135,7 @@ tr:nth-child(odd) td {
 }
 
 table>tr.green td {
-  background: green;
+  background: lightgreen;
 }
 
 /* tr:not(:first-child):hover td {

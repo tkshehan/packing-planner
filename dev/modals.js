@@ -1,4 +1,5 @@
 const packingApi = require('./packing-api');
+const {templates, saveTemplates} = require('./templates');
 
 function buildModalListeners(list) {
   let $main = $('main');
@@ -14,6 +15,9 @@ function buildModalListeners(list) {
 
   // Requires a clickable element with the class js-new-entry-button
   buildNewItemListeners($main, $body, list);
+
+  //Requires class js-new-templates-button
+  buildNewTemplateListeners($main, $body);
 }
 
 function buildSharedListeners($body) {
@@ -33,7 +37,6 @@ function buildNewListListener($main, $body) {
     let name = values[0].value;
     let template = values[1].value;
 
-    const {templates} = require('./templates');
     buildNewList(name, templates[template]);
 
     closeModal();
@@ -91,9 +94,6 @@ function displayNewListModal() {
 
       <label for="template">Template</label>
       <select name="template" id="template-select">
-        <option value="None">None</option>
-        <option value="Camping">Camping</option>
-        <option value="Beach">Beach</option>
       </select>
       <div class="form-buttons">
         <input type="submit" value="Create" class="button">
@@ -103,6 +103,28 @@ function displayNewListModal() {
 
   $content.append($newListForm);
   $modal.append($content);
+
+  $('select').append(generateTemplateOptions());
+
+  function generateTemplateOptions() {
+    const options = Object.keys(templates);
+    return options.map(key => {
+      return $('<option>').val(key).text(key);
+    });
+  }
+}
+
+function buildNewTemplateListeners($main, $body) {
+  $main.on('click', '.js-new-template-button', function(event) {
+    event.preventDefault();
+    displayNewTemplateModal();
+  });
+
+  $body.on('submit', '.js-new-template-form', function(event) {
+    event.preventDefault;
+
+    saveTemplates(templates);
+  })
 }
 
 function displayLoadListModal() {
@@ -142,6 +164,7 @@ function displayNewEntryModal() {
     <legend> New Item </legend>
     <label for ="item"> Item </label>
     <input type="text" name="item" id="new-item" required>
+    <label for="amount"> # </label>
     <input type="number" name="amount" id="amount" min="1" max="10" value="1" required>
     <div class="form-buttons">
       <input type="submit" value="Add" class="button">
@@ -150,6 +173,33 @@ function displayNewEntryModal() {
     `);
 
   $content.append($newEntryForm);
+  $modal.append($content);
+}
+
+function displayNewTemplateModal() {
+  let $overlay = $('<div>').addClass('overlay');
+  let $modal = $('<div>').addClass('modal');
+  $('body').append($overlay, $modal);
+
+  let $content = $('<div>').addClass('modal-content');
+  let $newTemplateForm = $('<form>')
+    .addClass('js-new-template-form')
+    .html(`
+      <legend> New Template </legend>
+      <label for="name"> Name </label>
+      <input type="text" name="name" id="new-template" required">
+      <div class="extra-item-buttons">
+        <label for ="item-0"> Item </label>
+        <input type="text" name="item-0" id="new-item-0" required>
+        <label for="amount-0"> # </label>
+        <input type="number" name="amount-0" id="amount-0" min="1" max="10" value="1" required>
+      </div>
+      <div class="form-buttons">
+        <input type="submit" value="Add" class="button">
+        <button type="button" class="js-close-modal button"> Cancel </button>
+      </div>
+    `);
+  $content.append($newTemplateForm);
   $modal.append($content);
 }
 

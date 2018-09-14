@@ -16,11 +16,15 @@ function buildPage() {
 
   function buildOptionBar() {
     let $optionBar = $('<section>').addClass('option-bar flex-grid');
-    let $newListButton = $('<div>').addClass('col js-new-list-button');
-    $newListButton.append('<button> New Packing List');
+    let $newListButton = $('<div>')
+      .addClass('col js-new-list-button')
+      .append('<button> New Packing List');
+    let $newTemplateButton = $('<div>')
+      .addClass('col js-new-template-button')
+      .append('<button> New Template');
     let $emptyCol = $('<div>').addClass('col');
 
-    $optionBar.append($newListButton, $emptyCol, $emptyCol.clone());
+    $optionBar.append($newListButton, $emptyCol, $newTemplateButton);
     return $optionBar;
   }
 }
