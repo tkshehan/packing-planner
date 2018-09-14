@@ -1,4 +1,5 @@
 const packingApi = require('./packing-api');
+const {templates, saveTemplates} = require('./templates');
 
 function buildModalListeners(list) {
   let $main = $('main');
@@ -14,6 +15,12 @@ function buildModalListeners(list) {
 
   // Requires a clickable element with the class js-new-entry-button
   buildNewItemListeners($main, $body, list);
+
+  //Requires class js-new-templates-button
+  buildNewTemplateListeners($main, $body);
+
+  //Requires class js-delete-template-option
+  buildDeleteTemplateListeners($main, $body);
 }
 
 function buildSharedListeners($body) {
@@ -33,7 +40,6 @@ function buildNewListListener($main, $body) {
     let name = values[0].value;
     let template = values[1].value;
 
-    const {templates} = require('./templates');
     buildNewList(name, templates[template]);
 
     closeModal();
@@ -83,18 +89,18 @@ function displayNewListModal() {
 
   let $content = $('<div>').addClass('modal-content');
   let $newListForm = $('<form>')
-    .addClass('js-new-list-form')
+    .addClass('js-new-list-form ')
     .html(`
       <legend> Create New List </legend>
-      <label for="name">Name: </label>
-      <input type="text" name="name" id="new-list-name" required>
-
-      <label for="template">Template</label>
-      <select name="template" id="template-select">
-        <option value="None">None</option>
-        <option value="Camping">Camping</option>
-        <option value="Beach">Beach</option>
+      <div>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="new-list-name" required>
+      </div>
+      <div>
+        <label for="template">Template</label>
+        <select name="template" id="template-select">
       </select>
+      </div>
       <div class="form-buttons">
         <input type="submit" value="Create" class="button">
         <button type="button" class="js-close-modal button"> Cancel </button>
@@ -103,6 +109,61 @@ function displayNewListModal() {
 
   $content.append($newListForm);
   $modal.append($content);
+
+  $('select').append(generateTemplateOptions());
+
+  function generateTemplateOptions() {
+    const options = Object.keys(templates);
+    return options.map(key => {
+      return $('<option>').val(key).text(key);
+    });
+  }
+}
+
+let templateEntryCounter = 0;
+function buildNewTemplateListeners($main, $body) {
+  $main.on('click', '.js-new-template-button', function(event) {
+    event.preventDefault();
+    displayNewTemplateModal();
+  });
+
+  $body.on('click', '.js-add-template-item', function(event) {
+    event.preventDefault();
+    templateEntryCounter++;
+    $('.js-extra-items').append(`
+        <label>
+          Item 
+          <input name="template-entry-${templateEntryCounter}" type="text" required> 
+        </label>
+    `);
+  })
+
+  $body.on('submit', '.js-new-template-form', function(event) {
+    let values = $(this).serializeArray();
+    event.preventDefault();
+    console.log(values);
+    addTemplate(values);
+    saveTemplates(templates);
+
+    closeModal();
+  })
+}
+
+function buildDeleteTemplateListeners($main, $body) {
+  $main.on('click', '.js-delete-template-option', function(event) {
+    event.preventDefault();
+    displayDeleteTemplateModal();
+  });
+
+  $body.on('click', '.js-delete-template', function(event) {
+    event.preventDefault();
+    let name = $(this).closest('tr').find('td').first().text();
+    console.log(name);
+    delete templates[name];
+    $(this).closest('tr').remove();
+
+    saveTemplates(templates);
+  });
 }
 
 function displayLoadListModal() {
@@ -142,6 +203,7 @@ function displayNewEntryModal() {
     <legend> New Item </legend>
     <label for ="item"> Item </label>
     <input type="text" name="item" id="new-item" required>
+    <label for="amount"> # </label>
     <input type="number" name="amount" id="amount" min="1" max="10" value="1" required>
     <div class="form-buttons">
       <input type="submit" value="Add" class="button">
@@ -150,6 +212,67 @@ function displayNewEntryModal() {
     `);
 
   $content.append($newEntryForm);
+  $modal.append($content);
+}
+
+function displayNewTemplateModal() {
+  let $overlay = $('<div>').addClass('overlay');
+  let $modal = $('<div>').addClass('modal');
+  $('body').append($overlay, $modal);
+
+  let $content = $('<div>').addClass('modal-content');
+  templateEntryCounter = 0;
+  let $newTemplateForm = $('<form>')
+    .addClass('js-new-template-form')
+    .html(`
+      <legend> New Template </legend>
+      <label for="name"> Name </label>
+      <input type="text" name="name" id="new-template" required">
+      <button class="js-add-template-item"> Add </button>
+      <div class="js-extra-items flex-col">
+        <label>
+          Item 
+          <input name="template-entry-0 type="text" required> 
+        </label>
+      </div>
+      <div class="form-buttons">
+        <input type="submit" value="Create Template" class="button">
+        <button type="button" class="js-close-modal button"> Cancel </button>
+      </div>
+    `);
+  $content.append($newTemplateForm);
+  $modal.append($content);
+}
+
+function displayDeleteTemplateModal() {
+  let $overlay = $('<div>').addClass('overlay');
+  let $modal = $('<div>').addClass('modal');
+  $('body').append($overlay, $modal);
+
+  let $content = $('<div>').addClass('modal-content');
+  let $deleteTemplateList = $('<table>')
+    .append(
+      $('<tr>').append(
+        $('<th>').text('Name'),
+        $('<th>')
+      )
+    );
+  Object.keys(templates).forEach(name => {
+    let $newRow = $('<tr>')
+      .append(
+        $('<td>').text(name),
+        $('<td>').addClass('td-delete').append(
+          $('<button>').text('Delete').addClass('js-delete-template')
+        )
+      )
+    $deleteTemplateList.append($newRow);
+  })
+  $content.append($deleteTemplateList);
+  $content.append(`
+      <div class="form-buttons">
+        <button type="button" class="js-close-modal button"> Close </button>
+      </div>`);
+
   $modal.append($content);
 }
 
@@ -196,6 +319,14 @@ function saveAndUpdate(list) {
       const {loadPlanner} = require('./planner');
       loadPlanner(list.id);
     });
+}
+
+function addTemplate(values) {
+  let name = values[0].value;
+  templates[name] = [];
+  for (let i = 1; i < values.length; i++) {
+    templates[name].push({item: values[i].value});
+  }
 }
 
 module.exports = {buildModalListeners, addNewEntry, saveAndUpdate};

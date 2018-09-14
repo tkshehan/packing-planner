@@ -29,12 +29,12 @@ button {
 
 .option-bar {
   background-color: #F1F1F1;
-  height: 30px;
-  padding: 5px;
+  height: auto;
+  padding: 5px 10px;
 }
 
 .option-bar button {
-  height: 20px;
+  height: 100%;
   width: 100%;
   border: transparent;
   display: block;
@@ -51,6 +51,11 @@ button {
   margin-right: 8px;
   padding: 5px;
   background-color: #F1F1F1;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .quick-items button {
@@ -135,14 +140,13 @@ tr:nth-child(odd) td {
 }
 
 table>tr.green td {
-  background: green;
+  background: lightgreen;
 }
 
-/* tr:not(:first-child):hover td {
+.list-table tr:not(:first-child):hover td {
   background: #666;
   color: white;
 }
-*/
 
 .flex-grid {
   display: flex;
@@ -152,4 +156,5 @@ table>tr.green td {
 
 .col {
   flex: 1;
+  margin: 2px;
 }

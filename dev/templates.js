@@ -1,4 +1,4 @@
-const templates = {
+const defaultTemplates = {
   'None': [],
   'Beach': [
     {item: 'towel'},
@@ -18,4 +18,19 @@ const templates = {
   ],
 }
 
-module.exports = {templates};
+let templates = loadTemplates() || defaultTemplates;
+
+function loadTemplates() {
+  return JSON.parse(localStorage.getItem('templates'));
+}
+
+function saveTemplates(templates) {
+  templates.None = [];
+  localStorage.setItem('templates', JSON.stringify(templates));
+}
+
+function resetTemplates() {
+  templates = defaultTemplates;
+}
+
+module.exports = {templates, saveTemplates, resetTemplates};
