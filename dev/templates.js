@@ -1,20 +1,20 @@
 const defaultTemplates = {
   'None': [],
   'Beach': [
-    {item: 'towel'},
-    {item: 'sunscreen'},
-    {item: 'water'},
-    {item: 'swimsuit'},
+    {item: 'Towel'},
+    {item: 'Sunscreen'},
+    {item: 'Water'},
+    {item: 'Swimsuit'},
   ],
   'Camping': [
-    {item: 'tent'},
-    {item: 'bug-spray'},
-    {item: 'sleeping-bag'},
-    {item: 'flashlight'},
-    {item: 'fire starter'},
-    {item: 'toiletries'},
-    {item: 'food'},
-    {item: 'first-aid kit'},
+    {item: 'Tent'},
+    {item: 'Bug-spray'},
+    {item: 'Sleeping-bag'},
+    {item: 'Flashlight'},
+    {item: 'Fire starter'},
+    {item: 'Toiletries'},
+    {item: 'Food'},
+    {item: 'First-aid Kit'},
   ],
 }
 
