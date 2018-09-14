@@ -40,11 +40,11 @@ function buildPage() {
     let $quickItems = $('<section>')
       .addClass('quick-items')
       .append($('<div>').text('Quick Add'));
-    let items = ['water', 'clothes', 'socks', 'food', 'swimsuit', 'phone-charger', 'first-aid kit'];
+    let items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
     items.forEach(function(item) {
       let $newButton = $('<button>')
-        .data('item', item)
-        .addClass(`js-quick-item quick-${item}`);
+        .data('item', item.toLowerCase())
+        .addClass(`js-quick-item quick-${item.toLowerCase()}`);
       $quickItems.append($newButton);
     });
     return $quickItems;
