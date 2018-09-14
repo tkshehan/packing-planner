@@ -25,7 +25,12 @@ function loadTemplates() {
 }
 
 function saveTemplates(templates) {
+  templates.None = [];
   localStorage.setItem('templates', JSON.stringify(templates));
 }
 
-module.exports = {templates, saveTemplates};
+function resetTemplates() {
+  templates = defaultTemplates;
+}
+
+module.exports = {templates, saveTemplates, resetTemplates};

@@ -18,6 +18,9 @@ function buildModalListeners(list) {
 
   //Requires class js-new-templates-button
   buildNewTemplateListeners($main, $body);
+
+  //Requires class js-delete-template-option
+  buildDeleteTemplateListeners($main, $body);
 }
 
 function buildSharedListeners($body) {
@@ -86,15 +89,18 @@ function displayNewListModal() {
 
   let $content = $('<div>').addClass('modal-content');
   let $newListForm = $('<form>')
-    .addClass('js-new-list-form')
+    .addClass('js-new-list-form ')
     .html(`
       <legend> Create New List </legend>
-      <label for="name">Name: </label>
-      <input type="text" name="name" id="new-list-name" required>
-
-      <label for="template">Template</label>
-      <select name="template" id="template-select">
+      <div>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="new-list-name" required>
+      </div>
+      <div>
+        <label for="template">Template</label>
+        <select name="template" id="template-select">
       </select>
+      </div>
       <div class="form-buttons">
         <input type="submit" value="Create" class="button">
         <button type="button" class="js-close-modal button"> Cancel </button>
@@ -141,6 +147,23 @@ function buildNewTemplateListeners($main, $body) {
 
     closeModal();
   })
+}
+
+function buildDeleteTemplateListeners($main, $body) {
+  $main.on('click', '.js-delete-template-option', function(event) {
+    event.preventDefault();
+    displayDeleteTemplateModal();
+  });
+
+  $body.on('click', '.js-delete-template', function(event) {
+    event.preventDefault();
+    let name = $(this).closest('tr').find('td').first().text();
+    console.log(name);
+    delete templates[name];
+    $(this).closest('tr').remove();
+
+    saveTemplates(templates);
+  });
 }
 
 function displayLoadListModal() {
@@ -218,6 +241,38 @@ function displayNewTemplateModal() {
       </div>
     `);
   $content.append($newTemplateForm);
+  $modal.append($content);
+}
+
+function displayDeleteTemplateModal() {
+  let $overlay = $('<div>').addClass('overlay');
+  let $modal = $('<div>').addClass('modal');
+  $('body').append($overlay, $modal);
+
+  let $content = $('<div>').addClass('modal-content');
+  let $deleteTemplateList = $('<table>')
+    .append(
+      $('<tr>').append(
+        $('<th>').text('Name'),
+        $('<th>')
+      )
+    );
+  Object.keys(templates).forEach(name => {
+    let $newRow = $('<tr>')
+      .append(
+        $('<td>').text(name),
+        $('<td>').addClass('td-delete').append(
+          $('<button>').text('Delete').addClass('js-delete-template')
+        )
+      )
+    $deleteTemplateList.append($newRow);
+  })
+  $content.append($deleteTemplateList);
+  $content.append(`
+      <div class="form-buttons">
+        <button type="button" class="js-close-modal button"> Close </button>
+      </div>`);
+
   $modal.append($content);
 }
 

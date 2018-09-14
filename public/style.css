@@ -143,11 +143,10 @@ table>tr.green td {
   background: lightgreen;
 }
 
-/* tr:not(:first-child):hover td {
+.list-table tr:not(:first-child):hover td {
   background: #666;
   color: white;
 }
-*/
 
 .flex-grid {
   display: flex;
@@ -157,4 +156,5 @@ table>tr.green td {
 
 .col {
   flex: 1;
+  margin: 2px;
 }

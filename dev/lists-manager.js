@@ -22,9 +22,12 @@ function buildPage() {
     let $newTemplateButton = $('<div>')
       .addClass('col js-new-template-button')
       .append('<button> New Template');
+    let $deleteTemplateButton = $('<div>')
+      .addClass('col js-delete-template-option')
+      .append('<button> Delete Templates');
     let $emptyCol = $('<div>').addClass('col');
 
-    $optionBar.append($newListButton, $emptyCol, $newTemplateButton);
+    $optionBar.append($newListButton, $emptyCol, $newTemplateButton, $deleteTemplateButton);
     return $optionBar;
   }
 }
@@ -65,7 +68,7 @@ function getLists() {
 
 function displayLists(lists) {
   let $table = $('<table>')
-    .addClass('js-table')
+    .addClass('js-table list-table')
     .append(
       $('<tr>').append(
         $('<th>').text('Name'),
