@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+}
+
+header, main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 10px;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+section {
+  width: 100%;
+}
+
+.option-bar {
+  height: auto;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+.option-bar button {
+  height: 100%;
+  width: 100%;
+  border: transparent;
+  display: block;
+  box-shadow: #888888 1px 2px;
+}
+
+.quick-items {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50px;
+  width: 60px;
+  text-align: center;
+  border: 1px solid black;
+  margin-right: 8px;
+  padding: 5px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-style-button {
+  border: none;
+  background: inherit;
+  color: inherit;
+}
+
+.quick-items button {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  margin-top: 5px;
+}
+
+table {
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid transparent;
+  height: 30px;
+  transition: all 0.3s;
+}
+
+.td-check {
+  text-align: left;
+  width: 20px;
+}
+
+.td-delete {
+  text-align: right;
+  width: 20px;
+}
+
+.flex-grid {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.col {
+  flex: 1;
+  margin: 2px;
+}

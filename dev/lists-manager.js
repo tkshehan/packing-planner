@@ -18,7 +18,7 @@ function buildPage() {
     let $optionBar = $('<section>').addClass('option-bar flex-grid');
     let $newListButton = $('<div>')
       .addClass('col js-new-list-button')
-      .append('<button> New Packing List');
+      .append('<button class="accent"> New Packing List');
     let $newTemplateButton = $('<div>')
       .addClass('col js-new-template-button')
       .append('<button> New Template');
@@ -80,10 +80,13 @@ function displayLists(lists) {
   lists.forEach((list) => {
     let $newRow = $('<tr>').data('id', list.id)
       .append(
-        $('<td>').text(`${list.name}`),
+        $('<td>').append(
+          $('<button>')
+            .addClass('no-style-button')
+            .text(`${list.name}`)),
         $('<td>').text(`${list.packed} / ${list.toPack}`),
         $('<td>').addClass('td-delete').append(
-          $('<button>').text('Delete').addClass('js-delete-list'),
+          $('<button>').text('delete').addClass('delete js-delete-list'),
         )
       );
     $table.append($newRow);

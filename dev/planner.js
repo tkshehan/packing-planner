@@ -24,7 +24,7 @@ function buildPage() {
     const $optionBar = $('<section>').addClass('option-bar flex-grid');
     const $newEntryButton = $('<div>')
       .addClass('col js-new-entry-button')
-      .append('<button> New Entry');
+      .append('<button class="accent"> New Entry');
 
     const $emptyCol = $('<div>').addClass('col');
     const $mainListButton = $('<div>').addClass('col js-back');
@@ -40,11 +40,12 @@ function buildPage() {
     let $quickItems = $('<section>')
       .addClass('quick-items')
       .append($('<div>').text('Quick Add'));
-    let items = ['water', 'clothes', 'socks', 'food', 'swimsuit', 'phone-charger', 'first-aid kit'];
+    let items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
     items.forEach(function(item) {
       let $newButton = $('<button>')
+        .attr('alt', `Add ${item}`)
         .data('item', item)
-        .addClass(`js-quick-item quick-${item}`);
+        .addClass(`js-quick-item quick-${item.toLocaleLowerCase()}`);
       $quickItems.append($newButton);
     });
     return $quickItems;
@@ -83,13 +84,13 @@ function displayData(data) {
       .append(
         $('<td>').addClass('td-check')
           .append(
-            $('<button>').text('Check').addClass('js-check-entry')
+            $('<button>').text('check').addClass('check js-check-entry')
           ),
         $('<td>').text(item.item),
         $('<td>').text(`${item.packed} / ${item.toPack}`).addClass('td-packed'),
         $('<td>').addClass('td-delete')
           .append(
-            $('<button>').text('delete').addClass('js-delete-entry')
+            $('<button>').text('delete').addClass('delete js-delete-entry')
           )
       )
 

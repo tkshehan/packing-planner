@@ -4,4 +4,9 @@ $(startUp);
 
 function startUp() {
   loadManager();
+  displayLandingWindow();
+}
+
+function displayLandingWindow() {
+
 }

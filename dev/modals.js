@@ -228,7 +228,7 @@ function displayNewTemplateModal() {
       <legend> New Template </legend>
       <label for="name"> Name </label>
       <input type="text" name="name" id="new-template" required">
-      <button class="js-add-template-item"> Add </button>
+      <button class="js-add-template-item"> + </button>
       <div class="js-extra-items flex-col">
         <label>
           Item 
