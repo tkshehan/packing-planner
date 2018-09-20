@@ -262,7 +262,7 @@ function displayDeleteTemplateModal() {
       .append(
         $('<td>').text(name),
         $('<td>').addClass('td-delete').append(
-          $('<button>').text('Delete').addClass('js-delete-template')
+          $('<button>').text('delete').addClass('delete js-delete-template')
         )
       )
     $deleteTemplateList.append($newRow);

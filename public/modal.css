@@ -10,8 +10,8 @@
 
 .modal {
   position: absolute;
-  left: 20%;
-  right: 20%;
+  left: 10%;
+  right: 10%;
   top: 33%;
   border-radius: 14px;
   padding: 8px;
@@ -20,7 +20,7 @@
 .modal-content {
   display: flex;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
   flex-direction: column;
   align-items: center;
 }

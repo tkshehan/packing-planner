@@ -4,21 +4,25 @@ let currentList = {};
 
 
 function loadPlanner(id) {
-  buildPage();
+  buildPage(id);
   buildListeners(currentList);
   getAndDisplayData(id);
 }
 
-function buildPage() {
+function buildPage(id) {
   $('main').empty();
 
   const $optionBar = buildOptionBar();
   const $quickItems = buildQuickItems();
   const $tableSection = $('<section>').addClass('table-section');
   const $content = $('<div>').addClass('flex-grid');
+  const $printLink = $('<a>', {
+    text: 'printer friendly version',
+    href: `./printer-friendly/?id=${id}`
+  });
 
   $content.append($quickItems, $tableSection);
-  $('main').append($optionBar, $content);
+  $('main').append($optionBar, $content, $printLink);
 
   function buildOptionBar() {
     const $optionBar = $('<section>').addClass('option-bar flex-grid');

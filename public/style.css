@@ -62,7 +62,7 @@ table button {
   background-color: white;
 }
 
-.accent {
+.accent, input[type=submit] {
   background-color: #ffb36a;
   font-weight: 600;
 }
