@@ -4,27 +4,31 @@ let currentList = {};
 
 
 function loadPlanner(id) {
-  buildPage();
+  buildPage(id);
   buildListeners(currentList);
   getAndDisplayData(id);
 }
 
-function buildPage() {
+function buildPage(id) {
   $('main').empty();
 
   const $optionBar = buildOptionBar();
   const $quickItems = buildQuickItems();
   const $tableSection = $('<section>').addClass('table-section');
   const $content = $('<div>').addClass('flex-grid');
+  const $printLink = $('<a>', {
+    text: 'printer friendly version',
+    href: `./printer-friendly/?id=${id}`
+  });
 
   $content.append($quickItems, $tableSection);
-  $('main').append($optionBar, $content);
+  $('main').append($optionBar, $content, $printLink);
 
   function buildOptionBar() {
     const $optionBar = $('<section>').addClass('option-bar flex-grid');
     const $newEntryButton = $('<div>')
       .addClass('col js-new-entry-button')
-      .append('<button> New Entry');
+      .append('<button class="accent"> New Entry');
 
     const $emptyCol = $('<div>').addClass('col');
     const $mainListButton = $('<div>').addClass('col js-back');
@@ -43,8 +47,9 @@ function buildPage() {
     let items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
     items.forEach(function(item) {
       let $newButton = $('<button>')
-        .data('item', item.toLowerCase())
-        .addClass(`js-quick-item quick-${item.toLowerCase()}`);
+        .attr('alt', `Add ${item}`)
+        .data('item', item)
+        .addClass(`js-quick-item quick-${item.toLocaleLowerCase()}`);
       $quickItems.append($newButton);
     });
     return $quickItems;
@@ -83,13 +88,13 @@ function displayData(data) {
       .append(
         $('<td>').addClass('td-check')
           .append(
-            $('<button>').text('Check').addClass('js-check-entry')
+            $('<button>').text('check').addClass('check js-check-entry')
           ),
         $('<td>').text(item.item),
         $('<td>').text(`${item.packed} / ${item.toPack}`).addClass('td-packed'),
         $('<td>').addClass('td-delete')
           .append(
-            $('<button>').text('delete').addClass('js-delete-entry')
+            $('<button>').text('delete').addClass('delete js-delete-entry')
           )
       )
 
