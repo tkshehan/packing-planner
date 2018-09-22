@@ -64,7 +64,7 @@ function getAndDisplayData(id) {
       currentList.name = data.name;
       return currentList;
     })
-    .then(displayData)
+    .then(displayData);
 }
 
 function getData(id) {
