@@ -3,6 +3,11 @@ html {
   background-color: #e8f6f8;
 }
 
+h2 {
+  text-align: center;
+  margin: 0;
+}
+
 section {
   border-radius: 5px;
 }

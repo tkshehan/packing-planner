@@ -84,6 +84,7 @@ function getData(id) {
 }
 
 function displayData(data) {
+  let $title = $('<h2>').text(data.name);
   let $table = $('<table>')
     .addClass('js-table items-table')
     .append(
@@ -117,7 +118,7 @@ function displayData(data) {
     $table.append($newRow);
   });
 
-  $('.table-section').append($table);
+  $('.table-section').append($title, $table);
 }
 
 function buildListeners(list) {
