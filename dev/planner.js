@@ -14,7 +14,11 @@ function buildPage(id) {
 
   const $optionBar = buildOptionBar();
   const $quickItems = buildQuickItems();
-  const $tableSection = $('<section>').addClass('table-section');
+  const $tableSection = $('<section>',
+    {
+      class: 'table-section',
+      role: 'region',
+    });
   const $content = $('<div>').addClass('flex-grid');
   const $printLink = $('<a>', {
     text: 'printer friendly version',
@@ -25,7 +29,11 @@ function buildPage(id) {
   $('main').append($optionBar, $content, $printLink);
 
   function buildOptionBar() {
-    const $optionBar = $('<section>').addClass('option-bar flex-grid');
+    const $optionBar = $('<section>',
+      {
+        class: 'option-bar flex-grid',
+        role: 'region',
+      });
     const $newEntryButton = $('<div>')
       .addClass('col js-new-entry-button')
       .append('<button class="accent"> New Entry');
@@ -41,15 +49,19 @@ function buildPage(id) {
   }
 
   function buildQuickItems() {
-    let $quickItems = $('<section>')
-      .addClass('quick-items')
+    let $quickItems = $('<section>', {
+      class: 'quick-items',
+      role: 'region',
+    })
       .append($('<div>').text('Quick Add'));
     let items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
     items.forEach(function(item) {
-      let $newButton = $('<button>')
-        .attr('alt', `Add ${item}`)
+      let $newButton = $('<button>',
+        {
+          alt: `Add ${item}`,
+          class: `js-quick-item quick-${item.toLocaleLowerCase()}`
+        })
         .data('item', item)
-        .addClass(`js-quick-item quick-${item.toLocaleLowerCase()}`);
       $quickItems.append($newButton);
     });
     return $quickItems;
