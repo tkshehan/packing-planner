@@ -37,6 +37,10 @@ button {
   background: #fff;
 }
 
+.blue {
+  background-color: #66d9ee;
+}
+
 .overlay {
   background: #000;
 }
