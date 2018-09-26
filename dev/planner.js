@@ -36,7 +36,7 @@ function buildPage(id) {
       });
     const $newEntryButton = $('<div>')
       .addClass('col js-new-entry-button')
-      .append('<button class="accent"> New Entry');
+      .append('<button class="accent"> Add Item');
 
     const $emptyCol = $('<div>').addClass('col');
     const $mainListButton = $('<div>').addClass('col js-back');
