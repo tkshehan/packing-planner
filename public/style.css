@@ -3,6 +3,19 @@ html {
   background-color: #e8f6f8;
 }
 
+header {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header>img {
+  max-width: 500px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+}
+
 section {
   border-radius: 5px;
 }
@@ -30,6 +43,10 @@ button {
 
 .modal-content {
   background: #fff;
+}
+
+.blue {
+  background-color: #66d9ee;
 }
 
 .overlay {

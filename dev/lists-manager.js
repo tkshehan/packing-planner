@@ -10,12 +10,20 @@ function loadManager() {
 function buildPage() {
   $('main').empty();
   let $optionBar = buildOptionBar();
-  let $tableSection = $('<section>').addClass('table-section');
+  let $tableSection = $('<section>',
+    {
+      class: 'table-section',
+      role: 'region',
+    });
 
   $('main').append($optionBar, $tableSection);
 
   function buildOptionBar() {
-    let $optionBar = $('<section>').addClass('option-bar flex-grid');
+    let $optionBar = $('<section>',
+      {
+        class: 'option-bar flex-grid',
+        role: 'region'
+      });
     let $newListButton = $('<div>')
       .addClass('col js-new-list-button')
       .append('<button class="accent"> New Packing List');

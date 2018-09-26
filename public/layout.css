@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body.flex-row>* {
+  flex: 1;
+}
+
 header, main {
   max-width: 600px;
   margin: 0 auto;
@@ -52,6 +56,11 @@ section {
 .flex-col {
   display: flex;
   flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .no-style-button {
