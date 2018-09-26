@@ -94,7 +94,10 @@ function displayLists(lists) {
             .text(`${list.name}`)),
         $('<td>').text(`${list.packed} / ${list.toPack}`),
         $('<td>').addClass('td-delete').append(
-          $('<button>').text('delete').addClass('delete js-delete-list'),
+          $('<button>', {
+            class: 'delete js-delete-list',
+            'aria-label': 'delete'
+          })
         )
       );
     $table.append($newRow);

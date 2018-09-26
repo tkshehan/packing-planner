@@ -101,15 +101,21 @@ function displayData(data) {
       .append(
         $('<td>').addClass('td-check')
           .append(
-            $('<button>').text('check').addClass('check js-check-entry')
+            $('<button>', {
+              class: 'check js-check-entry',
+              'aria-label': 'check'
+            })
           ),
         $('<td>').text(item.item),
         $('<td>').text(`${item.packed} / ${item.toPack}`).addClass('td-packed'),
         $('<td>').addClass('td-delete')
           .append(
-            $('<button>').text('delete').addClass('delete js-delete-entry')
+            $('<button>', {
+              class: 'delete js-delete-entry',
+              'aria-label': 'delete',
+            })
           )
-      )
+      );
 
     if (item.packed >= item.toPack) {
       $newRow.addClass('green');
