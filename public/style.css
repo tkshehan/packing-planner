@@ -81,13 +81,7 @@ table button {
 }
 
 .check {
-  background-color: inherit;
   background-image: url('./assets/005-untick.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  height: 32px;
-  width: 32px;
 }
 
 table>tr.green td button.check {
@@ -95,13 +89,19 @@ table>tr.green td button.check {
 }
 
 .delete {
-  background-color: inherit;
   background-image: url('./assets/delete.png');
+}
+
+.check, .delete {
+  background-color: inherit;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   height: 32px;
   width: 32px;
+  border-radius: 16px;
+  border: #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
 .list-table tr:not(:first-child):hover td {

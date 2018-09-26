@@ -262,9 +262,12 @@ function displayDeleteTemplateModal() {
       .append(
         $('<td>').text(name),
         $('<td>').addClass('td-delete').append(
-          $('<button>').text('delete').addClass('delete js-delete-template')
+          $('<button>', {
+            class: 'delete js-delete-template',
+            'aria-label': 'delete'
+          })
         )
-      )
+      );
     $deleteTemplateList.append($newRow);
   })
   $content.append($deleteTemplateList);
