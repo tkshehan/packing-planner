@@ -71,10 +71,6 @@ tr:nth-child(even) td {
   background: #FEFEFE;
 }
 
-table>tr.green td {
-  background: #66ee7ab9;
-}
-
 table button {
   background-color: white;
 }
@@ -84,12 +80,28 @@ table button {
   font-weight: 600;
 }
 
-.check:hover {
-  background-color: #ffb36a;
+.check {
+  background-image: url('./assets/005-untick.png');
 }
 
-.delete:hover {
-  background-color: rgb(255, 75, 15);
+table>tr.green td button.check {
+  background-image: url('./assets/004-tick.png');
+}
+
+.delete {
+  background-image: url('./assets/delete.png');
+}
+
+.check, .delete {
+  background-color: inherit;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  border: #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
 .list-table tr:not(:first-child):hover td {
