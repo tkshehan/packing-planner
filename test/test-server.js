@@ -72,6 +72,23 @@ describe('PackList API Resource', function() {
     return closeServer();
   });
 
+  describe('GET /api/packing endpoint', function() {
+    it('should return a summary of all packlists', function() {
+      return chai.request(app)
+        .get('/api/packing/')
+        .then(function(res) {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.have.a.lengthOf(10);
+
+          res.body.forEach(list => {
+            let expectedKeys = ['id', 'name', 'packed', 'toPack'];
+            expect(list).to.have.keys(expectedKeys);
+          })
+        })
+    })
+  });
+
   describe('GET /api/packing/:id endpoint', function() {
     it('should return the packlist of the id given', function() {
       let testList;
