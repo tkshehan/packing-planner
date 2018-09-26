@@ -1,7 +1,7 @@
 # Simple Packing
 [Demo Simple Packing Here](https://packing-planner.herokuapp.com/)
 
-![Screenshots](docs/imgs/ss1.png){height: 500px}
+![Screenshots](docs/imgs/ss1.png){:height="500px"}
 
 
 # API Documentation
