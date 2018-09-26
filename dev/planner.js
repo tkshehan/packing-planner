@@ -129,6 +129,7 @@ function buildListeners(list) {
   buildModalListeners(list);
 
   $main.on('click', '.js-back', function() {
+    packingApi.updatedById(currentList.id, currentList);
     const {loadManager} = require('./lists-manager');
     loadManager();
   });
