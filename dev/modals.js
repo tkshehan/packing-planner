@@ -136,7 +136,15 @@ function buildNewTemplateListeners($main, $body) {
           <input name="template-entry-${templateEntryCounter}" type="text" required> 
         </label>
     `);
-  })
+  });
+
+  $body.on('click', '.js-remove-template-item', function(event) {
+    event.preventDefault();
+    if (templateEntryCounter > 0) {
+      $(`input[name="template-entry-${templateEntryCounter}"]`).closest('label').remove();
+      templateEntryCounter--;
+    }
+  });
 
   $body.on('submit', '.js-new-template-form', function(event) {
     let values = $(this).serializeArray();
@@ -146,7 +154,7 @@ function buildNewTemplateListeners($main, $body) {
     saveTemplates(templates);
 
     closeModal();
-  })
+  });
 }
 
 function buildDeleteTemplateListeners($main, $body) {
@@ -228,7 +236,8 @@ function displayNewTemplateModal() {
       <legend> New Template </legend>
       <label for="name"> Name </label>
       <input type="text" name="name" id="new-template" required">
-      <button class="js-add-template-item"> + </button>
+      <button class="js-add-template-item" alt="add"> + </button>
+      <button class="js-remove-template-item" alt="remove"> - </button>
       <div class="js-extra-items flex-col">
         <label>
           Item 
