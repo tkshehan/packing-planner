@@ -259,6 +259,7 @@ function displayDeleteTemplateModal() {
   $('body').append($overlay, $modal);
 
   let $content = $('<div>').addClass('modal-content');
+  let $title = $('<h2>').text('Delete Templates');
   let $deleteTemplateList = $('<table>')
     .append(
       $('<tr>').append(
@@ -279,7 +280,7 @@ function displayDeleteTemplateModal() {
       );
     $deleteTemplateList.append($newRow);
   })
-  $content.append($deleteTemplateList);
+  $content.append($title, $deleteTemplateList);
   $content.append(`
       <div class="form-buttons">
         <button type="button" class="js-close-modal button"> Close </button>

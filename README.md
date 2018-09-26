@@ -1,9 +1,11 @@
 # Simple Packing
 [Demo Simple Packing Here](https://packing-planner.herokuapp.com/)
 
-# Summary
+![Screenshots](docs/imgs/ss1.png)
 
-# Features
+
+# API Documentation
+https://documenter.getpostman.com/view/5059696/RWaRNka9
 
 # Technology
 
