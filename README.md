@@ -1,7 +1,12 @@
 # Simple Packing
 [Demo Simple Packing Here](https://packing-planner.herokuapp.com/)
 
-<img src="docs/imgs/ss1.png" height="500">
+<img src="docs/imgs/ss1.png" height="400">
+<img src="docs/imgs/ss2.png" height="400">
+<img src="docs/imgs/ss3.png" height="400">
+<img src="docs/imgs/ss4.png" height="400">
+<img src="docs/imgs/ss5.png" height="400">
+<img src="docs/imgs/ss6.png" height="400">
 
 
 # API Documentation
