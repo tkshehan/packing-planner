@@ -70,7 +70,6 @@ function buildNewItemListeners($main, $body, list) {
 
   $body.on('submit', '.js-new-entry-form', function(event) {
     const values = $(this).serializeArray();
-    console.log(values);
     event.preventDefault();
 
     addNewEntry(list, values[0].value, values[1].value);
@@ -148,7 +147,6 @@ function buildNewTemplateListeners($main, $body) {
   $body.on('submit', '.js-new-template-form', function(event) {
     const values = $(this).serializeArray();
     event.preventDefault();
-    console.log(values);
     addTemplate(values);
     saveTemplates(templates);
 
@@ -165,7 +163,6 @@ function buildDeleteTemplateListeners($main, $body) {
   $body.on('click', '.js-delete-template', function(event) {
     event.preventDefault();
     const name = $(this).closest('tr').find('td').first().text();
-    console.log(name);
     delete templates[name];
     $(this).closest('tr').remove();
 
@@ -294,8 +291,6 @@ function closeModal() {
 }
 
 function buildNewList(name, template) {
-  console.log(`building new list with ${name} and ${template}`);
-
   const newList = {
     name: name,
     items: template,
@@ -309,13 +304,11 @@ function buildNewList(name, template) {
 }
 
 function loadList(id) {
-  console.log(`loading list with ${id}`);
   const {loadPlanner} = require('./planner');
   loadPlanner(id);
 }
 
 function addNewEntry(list, name, toPack = 1) {
-  console.log(`adding new item ${name}`);
   list.items.push({
     item: name,
     packed: 0,

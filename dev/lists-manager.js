@@ -55,7 +55,6 @@ function buildListeners() {
   $main.on('click', '.js-delete-list', function(event) {
     event.stopImmediatePropagation();
     const id = $(this).closest('tr').data('id');
-    console.log(id);
     packingApi.deleteById(id)
       .then(function() {
         $('.js-table').remove();
