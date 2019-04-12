@@ -9,8 +9,8 @@ function loadManager() {
 
 function buildPage() {
   $('main').empty();
-  let $optionBar = buildOptionBar();
-  let $tableSection = $('<section>',
+  const $optionBar = buildOptionBar();
+  const $tableSection = $('<section>',
     {
       class: 'table-section',
       role: 'region',
@@ -19,21 +19,21 @@ function buildPage() {
   $('main').append($optionBar, $tableSection);
 
   function buildOptionBar() {
-    let $optionBar = $('<section>',
+    const $optionBar = $('<section>',
       {
         class: 'option-bar flex-grid',
-        role: 'region'
+        role: 'region',
       });
-    let $newListButton = $('<div>')
+    const $newListButton = $('<div>')
       .addClass('col js-new-list-button')
       .append('<button class="accent"> New Packing List');
-    let $newTemplateButton = $('<div>')
+    const $newTemplateButton = $('<div>')
       .addClass('col js-new-template-button')
       .append('<button> New Template');
-    let $deleteTemplateButton = $('<div>')
+    const $deleteTemplateButton = $('<div>')
       .addClass('col js-delete-template-option')
       .append('<button> Delete Templates');
-    let $emptyCol = $('<div>').addClass('col');
+    const $emptyCol = $('<div>').addClass('col');
 
     $optionBar.append($newListButton, $emptyCol, $newTemplateButton, $deleteTemplateButton);
     return $optionBar;
@@ -41,12 +41,12 @@ function buildPage() {
 }
 
 function buildListeners() {
-  let $main = $('main');
+  const $main = $('main');
   $main.off();
   $('body').off();
 
   $main.on('click', 'tr:not(:first-child)', function() {
-    let id = $(this).data('id');
+    const id = $(this).data('id');
     const {loadPlanner} = require('./planner');
     $('.js-table-remove');
     loadPlanner(id);
@@ -54,14 +54,14 @@ function buildListeners() {
 
   $main.on('click', '.js-delete-list', function(event) {
     event.stopImmediatePropagation();
-    let id = $(this).closest('tr').data('id');
+    const id = $(this).closest('tr').data('id');
     console.log(id);
     packingApi.deleteById(id)
       .then(function() {
         $('.js-table').remove();
         getAndDisplayLists();
-      })
-  })
+      });
+  });
 
   buildModalListeners();
 }
@@ -75,7 +75,7 @@ function getLists() {
 }
 
 function displayLists(lists) {
-  let $table = $('<table>')
+  const $table = $('<table>')
     .addClass('js-table list-table')
     .append(
       $('<tr>').append(
@@ -86,7 +86,7 @@ function displayLists(lists) {
     );
 
   lists.forEach((list) => {
-    let $newRow = $('<tr>').data('id', list.id)
+    const $newRow = $('<tr>').data('id', list.id)
       .append(
         $('<td>').append(
           $('<button>')
@@ -95,8 +95,8 @@ function displayLists(lists) {
         $('<td>').text(`${list.packed} / ${list.toPack}`),
         $('<td>').addClass('td-delete').append(
           $('<button>', {
-            class: 'delete js-delete-list',
-            'aria-label': 'delete'
+            'class': 'delete js-delete-list',
+            'aria-label': 'delete',
           })
         )
       );
@@ -105,4 +105,4 @@ function displayLists(lists) {
   $('.table-section').append($table);
 };
 
-module.exports = {loadManager}
+module.exports = {loadManager};

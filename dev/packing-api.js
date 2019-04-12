@@ -1,31 +1,31 @@
 function post(data) {
-  let settings = {
+  const settings = {
     method: 'POST',
     url: './api/packing',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify(data),
-  }
+  };
 
   return $.ajax(settings);
 }
 
 function getMultiple() {
-  let settings = {
+  const settings = {
     method: 'GET',
     url: './api/packing',
     contentType: 'application/json; charset=utf-8',
-  }
+  };
 
   return $.ajax(settings);
 }
 
 function getById(id) {
-  let settings = {
+  const settings = {
     method: 'GET',
     url: `./api/packing/${id}`,
     contentType: 'application/json; charset=utf-8',
-  }
+  };
 
   return $.ajax(settings);
 }
@@ -34,23 +34,23 @@ function updatedById(id, data) {
   if (data.id !== id) {
     throw new Error('Paramater ID and data.id do not match');
   }
-  let settings = {
+  const settings = {
     method: 'PUT',
     url: `./api/packing/${id}`,
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify(data),
-  }
+  };
 
   return $.ajax(settings);
 }
 
 function deleteById(id) {
-  let settings = {
+  const settings = {
     method: 'DELETE',
     url: `./api/packing/${id}`,
     contentType: 'application/json; charset=utf-8',
-  }
+  };
 
   return $.ajax(settings);
 }

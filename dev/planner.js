@@ -1,6 +1,6 @@
 const packingApi = require('./packing-api');
 const {addNewEntry, buildModalListeners, saveAndUpdate} = require('./modals');
-let currentList = {};
+const currentList = {};
 
 
 function loadPlanner(id) {
@@ -22,7 +22,7 @@ function buildPage(id) {
   const $content = $('<div>').addClass('flex-grid');
   const $printLink = $('<a>', {
     text: 'printer friendly version',
-    href: `./printer-friendly/?id=${id}`
+    href: `./printer-friendly/?id=${id}`,
   });
 
   $content.append($quickItems, $tableSection);
@@ -49,19 +49,19 @@ function buildPage(id) {
   }
 
   function buildQuickItems() {
-    let $quickItems = $('<section>', {
+    const $quickItems = $('<section>', {
       class: 'quick-items',
       role: 'region',
     })
       .append($('<div>').text('Quick Add'));
-    let items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
+    const items = ['Water', 'Clothes', 'Socks', 'Food', 'Swimsuit', 'Phone-charger', 'First-aid Kit'];
     items.forEach(function(item) {
-      let $newButton = $('<button>',
+      const $newButton = $('<button>',
         {
           alt: `Add ${item}`,
-          class: `js-quick-item quick-${item.toLocaleLowerCase()}`
+          class: `js-quick-item quick-${item.toLocaleLowerCase()}`,
         })
-        .data('item', item)
+        .data('item', item);
       $quickItems.append($newButton);
     });
     return $quickItems;
@@ -70,7 +70,7 @@ function buildPage(id) {
 
 function getAndDisplayData(id) {
   getData(id)
-    .then(data => {
+    .then((data) => {
       currentList.id = data.id;
       currentList.items = data.items;
       currentList.name = data.name;
@@ -84,8 +84,8 @@ function getData(id) {
 }
 
 function displayData(data) {
-  let $title = $('<h2>').text(data.name);
-  let $table = $('<table>')
+  const $title = $('<h2>').text(data.name);
+  const $table = $('<table>')
     .addClass('js-table items-table')
     .append(
       $('<tr>').append(
@@ -97,13 +97,13 @@ function displayData(data) {
     );
 
   data.items.forEach((item) => {
-    let $newRow = $('<tr>').data('id', item._id)
+    const $newRow = $('<tr>').data('id', item._id)
       .append(
         $('<td>').addClass('td-check')
           .append(
             $('<button>', {
-              class: 'check js-check-entry',
-              'aria-label': 'check'
+              'class': 'check js-check-entry',
+              'aria-label': 'check',
             })
           ),
         $('<td>').text(item.item),
@@ -111,7 +111,7 @@ function displayData(data) {
         $('<td>').addClass('td-delete')
           .append(
             $('<button>', {
-              class: 'delete js-delete-entry',
+              'class': 'delete js-delete-entry',
               'aria-label': 'delete',
             })
           )
@@ -128,7 +128,7 @@ function displayData(data) {
 }
 
 function buildListeners(list) {
-  let $main = $('main');
+  const $main = $('main');
   $main.off();
   $('body').off();
 
@@ -141,8 +141,8 @@ function buildListeners(list) {
   });
 
   $main.on('click', '.js-check-entry', function() {
-    let $row = $(this).closest('tr');
-    let item = currentList.items.filter(item => item._id === $row.data('id'))[0];
+    const $row = $(this).closest('tr');
+    const item = currentList.items.filter((item) => item._id === $row.data('id'))[0];
 
     if (item.packed + 1 === item.toPack) {
       item.packed++;
@@ -155,11 +155,11 @@ function buildListeners(list) {
     }
 
     $row.children('.td-packed').text(`${item.packed} / ${item.toPack}`);
-  })
+  });
 
   $main.on('click', '.js-delete-entry', function() {
-    let $row = $(this).closest('tr');
-    currentList.items = currentList.items.filter(item => item._id !== $row.data('id'));
+    const $row = $(this).closest('tr');
+    currentList.items = currentList.items.filter((item) => item._id !== $row.data('id'));
     $row.remove();
   });
 
@@ -171,7 +171,7 @@ function buildListeners(list) {
     const newItem = $(this).data('item');
     let hasItem = false;
 
-    currentList.items.forEach(item => {
+    currentList.items.forEach((item) => {
       if (item.item === newItem) {
         item.toPack++;
         hasItem = true;
@@ -183,8 +183,7 @@ function buildListeners(list) {
     }
 
     saveAndUpdate(currentList);
-  })
-
+  });
 }
 
 module.exports = {loadPlanner};

@@ -2,8 +2,8 @@ const packingApi = require('./packing-api');
 const {templates, saveTemplates} = require('./templates');
 
 function buildModalListeners(list) {
-  let $main = $('main');
-  let $body = $('body');
+  const $main = $('main');
+  const $body = $('body');
 
   buildSharedListeners($body);
 
@@ -16,10 +16,10 @@ function buildModalListeners(list) {
   // Requires a clickable element with the class js-new-entry-button
   buildNewItemListeners($main, $body, list);
 
-  //Requires class js-new-templates-button
+  // Requires class js-new-templates-button
   buildNewTemplateListeners($main, $body);
 
-  //Requires class js-delete-template-option
+  // Requires class js-delete-template-option
   buildDeleteTemplateListeners($main, $body);
 }
 
@@ -34,17 +34,16 @@ function buildNewListListener($main, $body) {
   });
 
   $body.on('submit', '.js-new-list-form', function(event) {
-    let values = $(this).serializeArray();
+    const values = $(this).serializeArray();
     event.preventDefault();
 
-    let name = values[0].value;
-    let template = values[1].value;
+    const name = values[0].value;
+    const template = values[1].value;
 
     buildNewList(name, templates[template]);
 
     closeModal();
   });
-
 }
 
 function buildLoadListener($main, $body) {
@@ -54,7 +53,7 @@ function buildLoadListener($main, $body) {
   });
 
   $body.on('submit', '.js-load-list-form', function(event) {
-    let values = $(this).serializeArray();
+    const values = $(this).serializeArray();
     event.preventDefault();
 
     loadList(values[0].value);
@@ -70,7 +69,7 @@ function buildNewItemListeners($main, $body, list) {
   });
 
   $body.on('submit', '.js-new-entry-form', function(event) {
-    let values = $(this).serializeArray();
+    const values = $(this).serializeArray();
     console.log(values);
     event.preventDefault();
 
@@ -82,13 +81,13 @@ function buildNewItemListeners($main, $body, list) {
 }
 
 function displayNewListModal() {
-  let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal')
+  const $overlay = $('<div>').addClass('overlay');
+  const $modal = $('<div>').addClass('modal')
     .attr('aria-live', 'assertive');
   $('body').append($overlay, $modal);
 
-  let $content = $('<div>').addClass('modal-content');
-  let $newListForm = $('<form>')
+  const $content = $('<div>').addClass('modal-content');
+  const $newListForm = $('<form>')
     .addClass('js-new-list-form ')
     .html(`
       <legend> Create New List </legend>
@@ -114,7 +113,7 @@ function displayNewListModal() {
 
   function generateTemplateOptions() {
     const options = Object.keys(templates);
-    return options.map(key => {
+    return options.map((key) => {
       return $('<option>').val(key).text(key);
     });
   }
@@ -147,7 +146,7 @@ function buildNewTemplateListeners($main, $body) {
   });
 
   $body.on('submit', '.js-new-template-form', function(event) {
-    let values = $(this).serializeArray();
+    const values = $(this).serializeArray();
     event.preventDefault();
     console.log(values);
     addTemplate(values);
@@ -165,7 +164,7 @@ function buildDeleteTemplateListeners($main, $body) {
 
   $body.on('click', '.js-delete-template', function(event) {
     event.preventDefault();
-    let name = $(this).closest('tr').find('td').first().text();
+    const name = $(this).closest('tr').find('td').first().text();
     console.log(name);
     delete templates[name];
     $(this).closest('tr').remove();
@@ -175,14 +174,14 @@ function buildDeleteTemplateListeners($main, $body) {
 }
 
 function displayLoadListModal() {
-  let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal')
+  const $overlay = $('<div>').addClass('overlay');
+  const $modal = $('<div>').addClass('modal')
     .attr('aria-live', 'assertive');
   $('body').append($overlay, $modal);
 
 
-  let $content = $('<div>').addClass('modal-content');
-  let $loadModalForm = $('<form>')
+  const $content = $('<div>').addClass('modal-content');
+  const $loadModalForm = $('<form>')
     .addClass('js-load-list-form')
     .html(`
       <legend> Load A List </legend>
@@ -199,13 +198,13 @@ function displayLoadListModal() {
 }
 
 function displayNewEntryModal() {
-  let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal')
+  const $overlay = $('<div>').addClass('overlay');
+  const $modal = $('<div>').addClass('modal')
     .attr('aria-live', 'assertive');
   $('body').append($overlay, $modal);
 
-  let $content = $('<div>').addClass('modal-content');
-  let $newEntryForm = $('<form>')
+  const $content = $('<div>').addClass('modal-content');
+  const $newEntryForm = $('<form>')
     .addClass('js-new-entry-form')
     .html(`
     <legend> New Item </legend>
@@ -224,13 +223,13 @@ function displayNewEntryModal() {
 }
 
 function displayNewTemplateModal() {
-  let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal');
+  const $overlay = $('<div>').addClass('overlay');
+  const $modal = $('<div>').addClass('modal');
   $('body').append($overlay, $modal);
 
-  let $content = $('<div>').addClass('modal-content');
+  const $content = $('<div>').addClass('modal-content');
   templateEntryCounter = 0;
-  let $newTemplateForm = $('<form>')
+  const $newTemplateForm = $('<form>')
     .addClass('js-new-template-form')
     .html(`
       <legend> New Template </legend>
@@ -254,32 +253,32 @@ function displayNewTemplateModal() {
 }
 
 function displayDeleteTemplateModal() {
-  let $overlay = $('<div>').addClass('overlay');
-  let $modal = $('<div>').addClass('modal');
+  const $overlay = $('<div>').addClass('overlay');
+  const $modal = $('<div>').addClass('modal');
   $('body').append($overlay, $modal);
 
-  let $content = $('<div>').addClass('modal-content');
-  let $title = $('<h2>').text('Delete Templates');
-  let $deleteTemplateList = $('<table>')
+  const $content = $('<div>').addClass('modal-content');
+  const $title = $('<h2>').text('Delete Templates');
+  const $deleteTemplateList = $('<table>')
     .append(
       $('<tr>').append(
         $('<th>').text('Name'),
         $('<th>')
       )
     );
-  Object.keys(templates).forEach(name => {
-    let $newRow = $('<tr>')
+  Object.keys(templates).forEach((name) => {
+    const $newRow = $('<tr>')
       .append(
         $('<td>').text(name),
         $('<td>').addClass('td-delete').append(
           $('<button>', {
-            class: 'delete js-delete-template',
-            'aria-label': 'delete'
+            'class': 'delete js-delete-template',
+            'aria-label': 'delete',
           })
         )
       );
     $deleteTemplateList.append($newRow);
-  })
+  });
   $content.append($title, $deleteTemplateList);
   $content.append(`
       <div class="form-buttons">
@@ -297,7 +296,7 @@ function closeModal() {
 function buildNewList(name, template) {
   console.log(`building new list with ${name} and ${template}`);
 
-  let newList = {
+  const newList = {
     name: name,
     items: template,
   };
@@ -307,7 +306,6 @@ function buildNewList(name, template) {
       const {loadPlanner} = require('./planner');
       loadPlanner(res.id);
     });
-
 }
 
 function loadList(id) {
@@ -335,7 +333,7 @@ function saveAndUpdate(list) {
 }
 
 function addTemplate(values) {
-  let name = values[0].value;
+  const name = values[0].value;
   templates[name] = [];
   for (let i = 1; i < values.length; i++) {
     templates[name].push({item: values[i].value});

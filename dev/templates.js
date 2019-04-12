@@ -16,7 +16,7 @@ const defaultTemplates = {
     {item: 'Food'},
     {item: 'First-aid Kit'},
   ],
-}
+};
 
 let templates = loadTemplates() || defaultTemplates;
 
