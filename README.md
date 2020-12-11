@@ -1,7 +1,10 @@
 # Simple Packing
 [Demo Simple Packing Here](https://packing-planner.herokuapp.com/)
+
 DEPRECATED
+
 This app's DB was previously hosted on MLab, which has discontinued its free hosting options.
+
 I will leave the app up for now, but expect limited functionality.
 
 
